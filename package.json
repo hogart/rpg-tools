@@ -2,6 +2,7 @@
   "name": "rpg-tools",
   "version": "0.1.0",
   "main": "index.js",
+  "desription": "ES5/6 library for RPG genre: inventory operations, modifiers applications, random selections, etc",
   "devDependencies": {
     "chai": "^2.2.x",
     "eslint": "^0.18.x",
@@ -10,7 +11,7 @@
   },
   "scripts": {
     "lint": "jscs . && eslint .",
-    "unit": "opn ./test/index.html",
+    "unit": "mocha -u bdd -R spec --recursive test",
     "test": "npm run lint && npm run unit"
   },
   "jscsConfig": {

@@ -45,7 +45,6 @@
     };
 
 
-
     /**
      * Does the wearer met this requirements?
      * @param {Object} wearer
@@ -57,10 +56,18 @@
             return true;
         }
 
+        if (!utils.isObject(wearer)) {
+            throw new TypeError('Invalid wearer');
+        }
+
         var met = true;
         var requirementNames = Object.keys(requirements);
         var reqName;
         var req;
+
+        if (!requirementNames.length) { // fast return, empty requirements mean "anything goes"
+            return true;
+        }
 
         for (var i = 0; i < requirementNames.length; i++) {
             reqName = requirementNames[i];
