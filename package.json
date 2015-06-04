@@ -1,0 +1,54 @@
+{
+  "name": "rpg-tools",
+  "version": "0.1.0",
+  "main": "index.js",
+  "devDependencies": {
+    "chai": "^2.2.x",
+    "eslint": "^0.18.x",
+    "jscs": "^1.12.x",
+    "mocha": "^2.2.1"
+  },
+  "scripts": {
+    "lint": "jscs . && eslint .",
+    "unit": "opn ./test/index.html",
+    "test": "npm run lint && npm run unit"
+  },
+  "jscsConfig": {
+    "requireSpaceAfterKeywords": [
+      "if",
+      "for",
+      "while",
+      "do",
+      "switch",
+      "try",
+      "catch"
+    ],
+    "disallowKeywordsOnNewLine": [
+      "else"
+    ],
+    "disallowSpaceBeforePostfixUnaryOperators": true,
+    "disallowMultipleLineStrings": true,
+    "requireSpaceBeforeBinaryOperators": true,
+    "requireSpaceAfterBinaryOperators": true,
+    "disallowSpaceAfterPrefixUnaryOperators": true,
+    "excludeFiles": [
+      "node_modules"
+    ]
+  },
+  "eslintConfig": {
+    "env": {
+      "browser": true,
+      "node": true
+    },
+    "rules": {
+      "quotes": [
+        2,
+        "single",
+        "avoid-escape"
+      ],
+      "eol-last": [
+        0
+      ]
+    }
+  }
+}
