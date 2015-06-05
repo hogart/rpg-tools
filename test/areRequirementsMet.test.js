@@ -128,7 +128,7 @@ describe('areRequirementsMet', function () {
     });
 
     it('throws errors when invalid arguments passed', function () {
-		var requirement = {dex: 12};
+        var requirement = {dex: 12};
         assert.throws(
             areRequirementsMet.bind(null, undefined, requirement),
             Error,
