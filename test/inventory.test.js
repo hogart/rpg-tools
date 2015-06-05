@@ -50,4 +50,25 @@ describe('inventory', function () {
             );
         });
     });
+
+    describe('equipFromInventory', function () {
+        it('removes item from inventory and places it to correct slot', function () {
+            var helmet = {
+                slot: 'head'
+            };
+
+            var attributes = {
+                equipped: {
+                    head: null,
+                    emptySlot: null
+                },
+                inventory: [helmet]
+            };
+
+            inventory.equipFromInventory(attributes, 0, 'head');
+
+            assert.lengthOf(attributes.inventory, 0);
+            assert.equal(attributes.equipped.head, helmet);
+        });
+    });
 });
