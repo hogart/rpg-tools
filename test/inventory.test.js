@@ -12,25 +12,37 @@ describe('inventory', function () {
 		assert.isFunction(inventory.isWearable);
     });
 
-    describe('uneqip', function () {
+    describe('unEqip', function () {
+        var helmet = {
+            slot: 'head'
+        };
+
+        var attributes = {
+            equipped: {
+                head: helmet,
+                emptySlot: null
+            },
+            inventory: []
+        };
+
         it('removes item from given slot and pushes it to inventory', function () {
-            var helmet = {
-                slot: 'head'
-            };
-
-            var attributes = {
-                equipped: {
-                    head: helmet
-                },
-                inventory: []
-            };
-
             inventory.unEquip(attributes, 'head');
 
             assert.lengthOf(attributes.inventory, 1);
             assert.equal(attributes.inventory[0], helmet);
             assert.isNull(attributes.equipped.head);
+        });
 
+        it('does not changes anything when working with empty slot', function () {
+            var inventoryLength = attributes.inventory.length;
+
+            inventory.unEquip(attributes, 'emptySlot');
+
+            assert.lengthOf(attributes.inventory, inventoryLength);
+            assert.isNull(attributes.equipped.emptySlot);
+        });
+
+        it('throws specific error with incorrect slot', function () {
             assert.throws(
                 inventory.unEquip.bind(null, attributes, 'non-existent slot name'),
                 /No such slot: non-existent slot name/,
