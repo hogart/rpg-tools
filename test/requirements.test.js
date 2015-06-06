@@ -71,6 +71,8 @@ describe('requirements', function () {
             assert.notOk(met(tooStrong, range), 'you are too strong for this armour, you gonna rip it apart');
 
             assert.notOk(met({}, range), 'missing property leads to fail');
+
+            //TODO: describe incomplete requirements: {min: 10} (no max field and vice versa)
         });
 
         it('properly works with primitive requirements', function () {
