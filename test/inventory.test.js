@@ -5,6 +5,24 @@
 var inventory = require('../lib/inventory');
 var assert = require('chai').assert;
 
+var helmet = {
+    slot: 'head'
+};
+var heavyHelmet = {
+    slot: 'head',
+    name: 'heavy helmet',
+    requirements: {
+        str: { min: 10 }
+    }
+};
+var lightHelmet = {
+    slot: 'head',
+    name: 'light helmet',
+    requirements: {
+        str: { min: 0 }
+    }
+};
+
 describe('inventory', function () {
     it('have desired methods', function () {
 		assert.isFunction(inventory.unEquip);
@@ -13,9 +31,7 @@ describe('inventory', function () {
     });
 
     describe('unEqip', function () {
-        var helmet = {
-            slot: 'head'
-        };
+        var unEquip = inventory.unEquip;
         var attributes = {
             equipped: {
                 head: helmet,
@@ -23,7 +39,6 @@ describe('inventory', function () {
             },
             inventory: []
         };
-        var unEquip = inventory.unEquip;
 
         it('returns same object it was given', function () {
             var newAttribs = unEquip(attributes, 'emptySlot');
@@ -58,23 +73,6 @@ describe('inventory', function () {
 
     describe('equipFromInventory', function () {
         var equip = inventory.equipFromInventory;
-        var helmet = {
-            slot: 'head'
-        };
-        var heavyHelmet = {
-            slot: 'head',
-            name: 'heavy helmet',
-            requirements: {
-                str: { min: 10 }
-            }
-        };
-        var lightHelmet = {
-            slot: 'head',
-            name: 'light helmet',
-            requirements: {
-                str: { min: 0 }
-            }
-        };
 
         it('returns same object it was given', function () {
             var attributes = {
@@ -125,7 +123,7 @@ describe('inventory', function () {
         
         it('throws error on invalid slotName and does not change inventory and equipped', function () {
             var badItem = {
-                slot: 'wtf', name: 'wtf'
+                slot: 'wtf slot', name: 'wtf'
             };
             var attributes = {
                 equipped: {
@@ -146,7 +144,7 @@ describe('inventory', function () {
 
             assert.throws(
                 equip.bind(null, attributes, 1),
-                /No such slot: wtf/,
+                /No such slot: wtf slot/,
                 'no such slot thrown when slot was auto-selected'
             );
 
@@ -213,6 +211,70 @@ describe('inventory', function () {
             equip(attributes, 0);
             assert.deepEqual(attributes.equipped, {head: heavyHelmet});
             assert.deepEqual(attributes.inventory, [lightHelmet]);
+        })
+    });
+
+    describe('isWearable', function () {
+        var isWearable = inventory.isWearable;
+
+        it('throws error on invalid index and does not change inventory and equipped', function () {
+            var attributes = {
+                equipped: {
+                    head: null,
+                    emptySlot: null
+                },
+                inventory: [helmet]
+            };
+
+            assert.throws(
+                isWearable.bind(null, attributes, 1),
+                /Invalid inventory index: 1/,
+                'no such index thrown'
+            );
+        });
+
+        it('throws error when item requirements not met', function () {
+            var attributes = {
+                str: 1,
+                equipped: {
+                    head: null
+                },
+                inventory: [heavyHelmet, lightHelmet]
+            };
+
+            assert.throws(
+                isWearable.bind(null, attributes, 0),
+                /Item requirements not met/,
+                'requirements exception thrown'
+            );
+        });
+
+        it('throws error when item.slot and slotName mismatch', function () {
+            var attributes = {
+                equipped: {
+                    head: null,
+                    feet: null
+                },
+                inventory: [{name: 'slotless thing'}]
+            };
+
+            assert.throws(
+                isWearable.bind(null, attributes, 0),
+                /Item "slotless thing" can not be equipped/,
+                'slot mismatch thrown'
+            );
+        });
+        
+        it('returns string with destined slot', function () {
+            var attributes = {
+                equipped: {
+                    head: null
+                },
+                inventory: [helmet]
+            };
+
+            var result = isWearable(attributes, 0);
+            assert.equal('head', result);
         })
     });
 });
