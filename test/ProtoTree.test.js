@@ -97,7 +97,7 @@ describe('ProtoTree', function () {
     it('has `get` method', function () {
         assert.isFunction(protoTree.get);
     });
-    
+
     it('returns items by name', function () {
         var falchion = protoTree.get('falchion');
 
@@ -126,7 +126,7 @@ describe('ProtoTree', function () {
 
         assert.notProperty(falchion, 'proto', 'proto deleted');
     });
-    
+
     it('throws error when non-existent item is requested', function () {
         assert.throws(
             protoTree.get.bind(protoTree, 'wtf'),
@@ -134,12 +134,12 @@ describe('ProtoTree', function () {
             'correct exception on incorrect name'
         );
     });
-    
+
     it('throws error when item with invalid proto requested', function () {
         assert.throws(
             protoTree.get.bind(protoTree, 'invalid'),
             /Invalid proto specified for Error/,
             'correct exception on invalid item'
         );
-    })
+    });
 });

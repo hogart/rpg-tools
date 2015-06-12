@@ -163,7 +163,5 @@ describe('requirements', function () {
                 '[] wearer'
             );
         });
-    })
-
-
+    });
 });

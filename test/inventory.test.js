@@ -120,7 +120,7 @@ describe('inventory', function () {
             assert.deepEqual(attributes.equipped, {head: null, emptySlot: null});
             assert.deepEqual(attributes.inventory, [helmet]);
         });
-        
+
         it('throws error on invalid slotName and does not change inventory and equipped', function () {
             var badItem = {
                 slot: 'wtf slot', name: 'wtf'
@@ -151,7 +151,7 @@ describe('inventory', function () {
             assert.deepEqual(attributes.equipped, {head: null, emptySlot: null});
             assert.deepEqual(attributes.inventory, [helmet, badItem]);
         });
-        
+
         it('throws error when item.slot and slotName mismatch', function () {
             var attributes = {
                 equipped: {
@@ -211,7 +211,7 @@ describe('inventory', function () {
             equip(attributes, 0);
             assert.deepEqual(attributes.equipped, {head: heavyHelmet});
             assert.deepEqual(attributes.inventory, [lightHelmet]);
-        })
+        });
     });
 
     describe('isWearable', function () {
@@ -264,7 +264,7 @@ describe('inventory', function () {
                 'slot mismatch thrown'
             );
         });
-        
+
         it('returns string with destined slot', function () {
             var attributes = {
                 equipped: {
@@ -275,6 +275,6 @@ describe('inventory', function () {
 
             var result = isWearable(attributes, 0);
             assert.equal('head', result);
-        })
+        });
     });
 });
