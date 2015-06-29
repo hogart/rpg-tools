@@ -6,13 +6,15 @@
   "devDependencies": {
     "chai": "^2.2.x",
     "eslint": "^0.18.x",
+    "istanbul": "^0.3.17",
     "jscs": "^1.12.x",
     "mocha": "^2.2.1"
   },
   "scripts": {
-    "lint": "jscs . && eslint .",
+    "lint": "jscs . && eslint --ignore-path .gitignore .",
     "unit": "mocha -u bdd -R spec --recursive test",
-    "test": "npm run lint && npm run unit"
+    "coverage": "istanbul cover node_modules/.bin/_mocha -- -u bdd -R spec --recursive test",
+    "test": "npm run lint && npm run coverage"
   },
   "jscsConfig": {
     "requireSpaceAfterKeywords": [
@@ -33,7 +35,8 @@
     "requireSpaceAfterBinaryOperators": true,
     "disallowSpaceAfterPrefixUnaryOperators": true,
     "excludeFiles": [
-      "node_modules"
+      "node_modules",
+      "coverage"
     ]
   },
   "eslintConfig": {
