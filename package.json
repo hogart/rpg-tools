@@ -10,6 +10,8 @@
     "jscs": "^1.12.x",
     "mocha": "^2.2.1"
   },
+  "author": "Konstantin Kitmanov <doctor.hogart@gmail.com>",
+  "license": "MIT",
   "scripts": {
     "lint": "jscs . && eslint --ignore-path .gitignore .",
     "unit": "mocha -u bdd -R spec --recursive test",
