@@ -46,6 +46,16 @@ describe('requirements', function () {
                     max: 12
                 }
             };
+            var rangeMin = {
+                str: {
+                    min: 10
+                }
+            };
+            var rangeMax = {
+                str: {
+                    max: 12
+                }
+            };
 
             var worthy1 = {
                 str: 10
@@ -72,7 +82,16 @@ describe('requirements', function () {
 
             assert.notOk(met({}, range), 'missing property leads to fail');
 
-            //TODO: describe incomplete requirements: {min: 10} (no max field and vice versa)
+            assert.ok(met(worthy1, rangeMin), 'true positive for semi-open range (upper end)');
+            assert.ok(met(worthy2, rangeMin), 'true positive for semi-open range (upper end)');
+            assert.ok(met(worthy3, rangeMin), 'true positive for semi-open range (upper end)');
+            assert.notOk(met(tooWeak, rangeMin), 'true negative for semi-open range (upper end)');
+
+            assert.ok(met(worthy1, rangeMax), 'true positive for semi-opened range (lower end)');
+            assert.ok(met(worthy2, rangeMax), 'true positive for semi-opened range (lower end)');
+            assert.ok(met(worthy3, rangeMax), 'true positive for semi-opened range (lower end)');
+            assert.ok(met(tooWeak, rangeMax), 'true positive for semi-opened range (lower end)');
+            assert.notOk(met(tooStrong, rangeMax), 'true negative for semi-opened range (lower end)');
         });
 
         it('properly works with primitive requirements', function () {
