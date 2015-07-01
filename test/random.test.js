@@ -25,7 +25,7 @@ describe('random', function () {
     describe('random.int', function () {
         it('returns integer numbers in proper range', function () {
             var rand;
-            for (var i = 0; i < 10; i++) {
+            for (var i = 0; i < 20; i++) {
                 rand = random.int(5, 10);
                 assert.equal(rand, Math.round(rand));
                 assert.isBelow(rand, 10);
@@ -35,7 +35,7 @@ describe('random', function () {
 
         it('defaults to 0 if one argument is omitted', function () {
             var rand;
-            for (var i = 0; i < 10; i++) {
+            for (var i = 0; i < 20; i++) {
                 rand = random.int(5);
                 assert.isBelow(rand, 5);
                 assert.isAbove(rand, -1);
@@ -48,7 +48,7 @@ describe('random', function () {
             var hadPlus = false;
             var hadMinus = false;
             var sign;
-            for (var i = 0; i < 10; i++) {
+            for (var i = 0; i < 20; i++) {
                 sign = random.sign();
                 assert.include([-1, 1], sign);
                 if (sign > 0) {
