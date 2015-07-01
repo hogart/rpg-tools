@@ -2,8 +2,8 @@
 
 'use strict';
 
-var random = require('../lib/random');
 var assert = require('chai').assert;
+var random = require('../lib/random');
 
 describe('random', function () {
     it('has methods', function () {

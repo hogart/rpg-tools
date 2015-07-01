@@ -2,8 +2,8 @@
 
 'use strict';
 
-var inventory = require('../lib/inventory');
 var assert = require('chai').assert;
+var inventory = require('../lib/inventory');
 
 var helmet = {
     slot: 'head'

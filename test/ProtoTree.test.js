@@ -2,8 +2,8 @@
 
 'use strict';
 
-var ProtoTree = require('../lib/ProtoTree');
 var assert = require('chai').assert;
+var ProtoTree = require('../lib/ProtoTree');
 var weaponTree = {
     '@weapon': {
         name: '-- Weapon --',

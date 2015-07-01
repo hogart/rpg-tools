@@ -2,8 +2,8 @@
 
 'use strict';
 
-var met = require('../lib/requirements').met;
 var assert = require('chai').assert;
+var met = require('../lib/requirements').met;
 
 describe('requirements', function () {
     describe('met', function () {

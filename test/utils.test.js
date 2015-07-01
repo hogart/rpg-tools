@@ -2,8 +2,8 @@
 
 'use strict';
 
-var utils = require('../lib/utils');
 var assert = require('chai').assert;
+var utils = require('../lib/utils');
 
 describe('utils', function () {
     it('have methods', function () {
