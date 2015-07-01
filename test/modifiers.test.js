@@ -20,11 +20,6 @@ describe('modifiers', function () {
             assert.equal(modifiers.apply(4, -2), 2, 'substracted number ok');
         });
 
-        it('properly adds/substracts string', function () {
-            assert.equal(modifiers.apply(4, '2'), 6, 'added string ok');
-            assert.equal(modifiers.apply(4, '-2'), 2, 'substracted string ok');
-        });
-
         it('properly works with percents', function () {
             assert.equal(modifiers.apply(10, '100%'), 20, 'plus, when sign is ommited');
             assert.equal(modifiers.apply(10, '-100%'), 0, 'susbtracts percents correctly');
