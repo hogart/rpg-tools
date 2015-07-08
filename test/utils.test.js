@@ -79,9 +79,10 @@ describe('utils', function () {
                 }
             };
 
-            assert.equal(utils.keyPath(testObj, 'a.b.c'), 42);
-            assert.deepEqual(utils.keyPath(testObj, 'a.b'), {c: 42});
-            assert.isUndefined(utils.keyPath(testObj, 'a.c'));
+            assert.equal(utils.keyPath(testObj, 'a.b.c'), 42, 'deeply nested path');
+            assert.deepEqual(utils.keyPath(testObj, 'a.b'), {c: 42}, 'less deep');
+            assert.isUndefined(utils.keyPath(testObj, 'a.c'), 'incorrect path return undefined');
+            assert.deepEqual(utils.keyPath(testObj, 'a'), {b: {c: 42}}, 'direct access works too');
         });
 
         it('sets value by key', function () {
@@ -102,7 +103,15 @@ describe('utils', function () {
             assert.doesNotChange(
                 utils.keyPath.bind(null, testObj, 'a.c', 43),
                 testObj.a.b,
-                'c'
+                'c',
+                'incorrect path does not change'
+            );
+
+            assert.changes(
+                utils.keyPath.bind(null, testObj, 'a', 'new value'),
+                testObj,
+                'a',
+                'direct access works too'
             );
         });
     });
