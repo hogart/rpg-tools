@@ -106,4 +106,15 @@ describe('utils', function () {
             );
         });
     });
+
+    describe('utils.clone', function () {
+        it('returns copy of object', function () {
+            var src = {
+                a: 42
+            };
+            var dest = utils.clone(src);
+            assert.deepEqual(src, dest, 'deeply equal objects');
+            assert.notEqual(src, dest, 'but different ones');
+        });
+    });
 });
