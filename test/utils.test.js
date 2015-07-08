@@ -68,4 +68,42 @@ describe('utils', function () {
             assert.notOk(utils.isObject(undefined), 'undefined');
         });
     });
+
+    describe('utils.keyPath', function () {
+        it('gets value by key', function () {
+            var testObj = {
+                a: {
+                    b: {
+                        c: 42
+                    }
+                }
+            };
+
+            assert.equal(utils.keyPath(testObj, 'a.b.c'), 42);
+            assert.deepEqual(utils.keyPath(testObj, 'a.b'), {c: 42});
+            assert.isUndefined(utils.keyPath(testObj, 'a.c'));
+        });
+
+        it('sets value by key', function () {
+            var testObj = {
+                a: {
+                    b: {
+                        c: 42
+                    }
+                }
+            };
+
+            assert.changes(
+                utils.keyPath.bind(null, testObj, 'a.b.c', 43),
+                testObj.a.b,
+                'c'
+            );
+
+            assert.doesNotChange(
+                utils.keyPath.bind(null, testObj, 'a.c', 43),
+                testObj.a.b,
+                'c'
+            );
+        });
+    });
 });
