@@ -17,6 +17,17 @@ describe('requirements', function () {
             assert.ok(met({}, {}), 'empty object is ok');
         });
 
+        it('works with nested properties', function () {
+            var nestedWearer = {
+                some: {
+                    nested: {
+                        property: true
+                    }
+                }
+            };
+            assert.ok(met(nestedWearer, {'some.nested.property': true}));
+        });
+
         it('properly works with list requirements', function () {
             var list = {
                 race: ['dwarf', 'human']

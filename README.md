@@ -35,6 +35,7 @@ Contains one method: `met(wearer, requirements)`. Both arguments are objects. Ea
 2. object with `min` and/or `max` properties (either numerical or string) or
 3. primitive value.
 
+Name of field can be pathkey, e.g. 'some.nested.property'.
 If field with this name is missing from `wearer`, this too means requirements are not met.
 
 Examples:
@@ -52,6 +53,26 @@ Examples:
     assert.isTrue(requirements.met(goodHobbit, slingRequirements), 'good hobbit');
     assert.isTrue(requirements.met(nobleElf, slingRequirements), 'noble elf');
     assert.isFalse(requirements.met(dirtyHuman, slingRequirements), 'dirty ork');
+
+    // nested
+    var staffRequirements = {
+        class: {
+            subclass: ['elementalist', 'necromancer']
+        }
+    }
+    var archMage = {
+        class: {
+            type: 'manaUser',
+            subclass: 'elementalist'
+        }
+    }
+    var apprentice = {
+        class: {
+            type: 'manaUser' // no subclass yet, too young
+        }
+    }
+    assert.isTrue(requirements.met(archMage, staffRequirements));
+    assert.isFalse(requirements.met(apprentice, staffRequirements));
 ```
 
 See more examples in `test/requirements.test.js`.
@@ -142,7 +163,7 @@ This module depends on [`utils`](#utils).
 
 ### `inventory`
 
-Containt several method for inventory manipulation. Each of them accepts `attributes` object, consists at least of `equipped` object and `inventory` array. `equipped` object maps character slot names to items carried in those slots, and `inventory` is array of items.
+Contains several method for inventory manipulation. Each of them accepts `attributes` object, consists at least of `equipped` object and `inventory` array. `equipped` object maps character slot names to items carried in those slots, and `inventory` is array of items.
 
 Every method here can throw a lot of different exceptions, because many things can go wrong.
 
