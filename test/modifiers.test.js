@@ -49,4 +49,49 @@ describe('modifiers', function () {
             assert.equal(applyMod(10, '+16%'), 11.6, 'explicit "+" is fine too');
         });
     });
+
+    describe('applyObject', function () {
+        var applyObj = modifiers.applyObject;
+
+        it('applies modifiers in object form', function () {
+            var src = {
+                str: 12,
+                dex: 10,
+                vitals: {
+                    hp: 10
+                }
+            };
+            var awkwardShieldOfStrength = {
+                str: '50%',
+                dex: '-10%',
+                'vitals.hp': '+10%'
+            };
+            var shieldOfHealth = {
+                hp: '+25%'
+            };
+            var result = applyObj(src, awkwardShieldOfStrength);
+
+            assert.deepEqual({str: 18, dex: 9, vitals: {hp: 11}}, result, 'resulting object looks as expected');
+
+            var result2 = applyObj(src, shieldOfHealth);
+            assert.deepEqual(result2, src, 'when property is missing, it does not change original object');
+        });
+
+        it('treats third argument correctly', function () {
+            var src = {
+                str: 12,
+                dex: 10
+            };
+            var awkwardShieldOfStrength = {
+                str: '50%',
+                dex: '-10%'
+            };
+            var result = applyObj(src, awkwardShieldOfStrength);
+
+            assert.notEqual(src, result, 'and source object is intact');
+
+            var result2 = applyObj(src, awkwardShieldOfStrength, true);
+            assert.equal(src, result2, 'source object changed when called with 3rd arg true');
+        });
+    });
 });
