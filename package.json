@@ -1,6 +1,6 @@
 {
   "name": "rpg-tools",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "main": "index.js",
   "desription": "ES5/6 library for RPG genre: inventory operations, modifiers applications, random selections, etc",
   "devDependencies": {

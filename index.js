@@ -2,14 +2,19 @@
     'use strict';
     /* global define, module, require */
 
-    var modules = ['Dice', 'inventory', 'modifiers', 'ProtoTree', 'random', 'requirements'];
-    var paths = modules.map(function (module) { return './lib/' + module; });
-
     if (typeof define === 'function' && define.amd) { // AMD
-        define(paths, factory);
+        define(['./lib/Dice', './lib/inventory', './lib/modifiers', './lib/ProtoTree', './lib/random', './lib/requirements'], factory);
     } else if (typeof exports === 'object') { // Node, browserify and alike
-        module.exports = factory.apply(null, paths.map(function (path) { return require(path); }));
+        module.exports = factory.apply(
+            require('./lib/Dice'),
+            require('./lib/inventory'),
+            require('./lib/modifiers'),
+            require('./lib/ProtoTree'),
+            require('./lib/random'),
+            require('./lib/requirements')
+        );
     } else { // Browser globals (root is window)
+        var modules = ['Dice', 'inventory', 'modifiers', 'ProtoTree', 'random', 'requirements'];
         root.rpgTools = (root.rpgTools || {});
         root.rpgTools = factory.apply(null, modules.map(function (module) { return root.rpgTools[module]; }));
     }
