@@ -1,4 +1,5 @@
 /* eslint-env mocha */
+/* global describe, it, beforeEach */
 
 'use strict';
 

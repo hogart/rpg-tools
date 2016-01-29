@@ -1,4 +1,5 @@
 /* eslint-env mocha */
+/* global describe, it */
 
 'use strict';
 
@@ -166,5 +167,3 @@ describe('Dice', function () {
 
     });
 });
-
-
