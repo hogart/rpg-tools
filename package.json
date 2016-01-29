@@ -4,11 +4,11 @@
   "main": "index.js",
   "desription": "ES5/6 library for RPG genre: inventory operations, modifiers applications, random selections, etc",
   "devDependencies": {
-    "chai": "^2.2.x",
-    "eslint": "^0.18.x",
-    "istanbul": "^0.3.17",
-    "jscs": "^1.12.x",
-    "mocha": "^2.2.1"
+    "chai": "^3.5.0",
+    "eslint": "^1.10.3",
+    "istanbul": "^0.4.2",
+    "jscs": "^2.9.0",
+    "mocha": "^2.4.5"
   },
   "author": "Konstantin Kitmanov <doctor.hogart@gmail.com>",
   "license": "MIT",
