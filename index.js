@@ -5,7 +5,8 @@
     if (typeof define === 'function' && define.amd) { // AMD
         define(['./lib/Dice', './lib/inventory', './lib/modifiers', './lib/ProtoTree', './lib/random', './lib/requirements'], factory);
     } else if (typeof exports === 'object') { // Node, browserify and alike
-        module.exports = factory.apply(
+    console.log('node')
+        module.exports = factory(
             require('./lib/Dice'),
             require('./lib/inventory'),
             require('./lib/modifiers'),
@@ -14,6 +15,7 @@
             require('./lib/requirements')
         );
     } else { // Browser globals (root is window)
+    console.log('browser')
         var modules = ['Dice', 'inventory', 'modifiers', 'ProtoTree', 'random', 'requirements'];
         root.rpgTools = (root.rpgTools || {});
         root.rpgTools = factory.apply(null, modules.map(function (module) { return root.rpgTools[module]; }));
